@@ -72,11 +72,6 @@ Here's an attempt to put some light on the differences between them.
 
 ## Tables
 
-| Library | Number of available functions              |
-|---------|-------------------------------------------:|
-| libssh2 | 170 |
-| libssh  | 213 |
-
 | item | libssh2 | libssh |
 |------|---------|--------|
 | Licence  | BSD  | LGPL |
