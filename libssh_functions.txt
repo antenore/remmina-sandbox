@@ -1,0 +1,213 @@
+int 	ssh_userauth_agent (ssh_session session, const char *username)	Try to do public key authentication with ssh agent.
+int 	ssh_userauth_gssapi (ssh_session session)	Try to authenticate through the "gssapi-with-mic" method.
+int 	ssh_userauth_kbdint (ssh_session session, const char *user, const char *submethods)	Try to authenticate through the "keyboard-interactive" method.
+const char * 	ssh_userauth_kbdint_getanswer (ssh_session session, unsigned int i)	Get the answer for a question from a message block.
+const char * 	ssh_userauth_kbdint_getinstruction (ssh_session session)	Get the "instruction" of the message block.
+const char * 	ssh_userauth_kbdint_getname (ssh_session session)	Get the "name" of the message block.
+int 	ssh_userauth_kbdint_getnanswers (ssh_session session)	Get the number of answers the client has given.
+int 	ssh_userauth_kbdint_getnprompts (ssh_session session)	Get the number of prompts (questions) the server has given.
+const char * 	ssh_userauth_kbdint_getprompt (ssh_session session, unsigned int i, char *echo)	Get a prompt from a message block.
+int 	ssh_userauth_kbdint_setanswer (ssh_session session, unsigned int i, const char *answer)	Set the answer for a question from a message block.
+int 	ssh_userauth_list (ssh_session session, const char *username)	Get available authentication methods from the server.
+int 	ssh_userauth_none (ssh_session session, const char *username)	Try to authenticate through the "none" method.
+int 	ssh_userauth_password (ssh_session session, const char *username, const char *password)	Try to authenticate by password.
+int 	ssh_userauth_publickey (ssh_session session, const char *username, const ssh_key privkey)	Authenticate with public/private key or certificate.
+int 	ssh_userauth_publickey_auto (ssh_session session, const char *username, const char *passphrase)	Tries to automatically authenticate with public key and "none".
+int 	ssh_userauth_try_publickey (ssh_session session, const char *username, const ssh_key pubkey)	Try to authenticate with the given public key.
+int 	ssh_buffer_add_data (struct ssh_buffer_struct *buffer, const void *data, uint32_t len)	Add data at the tail of a buffer.
+void 	ssh_buffer_free (struct ssh_buffer_struct *buffer)	Deallocate a SSH buffer.
+void * 	ssh_buffer_get (struct ssh_buffer_struct *buffer)	Get a pointer to the head of a buffer at the current position.
+uint32_t 	ssh_buffer_get_data (struct ssh_buffer_struct *buffer, void *data, uint32_t len)	Get the remaining data out of the buffer and adjust the read pointer.
+uint32_t 	ssh_buffer_get_len (struct ssh_buffer_struct *buffer)	Get the length of the buffer from the current position.
+struct ssh_buffer_struct * 	ssh_buffer_new (void)	Create a new SSH buffer.
+int 	ssh_buffer_reinit (struct ssh_buffer_struct *buffer)	Reinitialize a SSH buffer.
+void 	ssh_buffer_set_secure (ssh_buffer buffer)	Sets the buffer as secure.
+int 	channel_read_buffer (ssh_channel channel, ssh_buffer buffer, uint32_t count, int is_stderr)	Read data from a channel into a buffer.
+ssh_channel 	ssh_channel_accept_forward (ssh_session session, int timeout_ms, int *destination_port)	Accept an incoming TCP/IP forwarding channel and get information about incomming connection.
+ssh_channel 	ssh_channel_accept_x11 (ssh_channel channel, int timeout_ms)	Accept an X11 forwarding channel.
+int 	ssh_channel_cancel_forward (ssh_session session, const char *address, int port)	Sends the "cancel-tcpip-forward" global request to ask the server to cancel the tcpip-forward request.
+int 	ssh_channel_change_pty_size (ssh_channel channel, int cols, int rows)	Change the size of the terminal associated to a channel.
+int 	ssh_channel_close (ssh_channel channel)	Close a channel.
+void 	ssh_channel_free (ssh_channel channel)	Close and free a channel.
+int 	ssh_channel_get_exit_status (ssh_channel channel)	Get the exit status of the channel (error code from the executed instruction).
+ssh_session 	ssh_channel_get_session (ssh_channel channel)	Recover the session in which belongs a channel.
+int 	ssh_channel_is_closed (ssh_channel channel)	Check if the channel is closed or not.
+int 	ssh_channel_is_eof (ssh_channel channel)	Check if remote has sent an EOF.
+int 	ssh_channel_is_open (ssh_channel channel)	Check if the channel is open or not.
+int 	ssh_channel_listen_forward (ssh_session session, const char *address, int port, int *bound_port)	Sends the "tcpip-forward" global request to ask the server to begin listening for inbound connections.
+ssh_channel 	ssh_channel_new (ssh_session session)	Allocate a new channel.
+int 	ssh_channel_open_auth_agent (ssh_channel channel)	Open an agent authentication forwarding channel.
+int 	ssh_channel_open_forward (ssh_channel channel, const char *remotehost, int remoteport, const char *sourcehost, int localport)	Open a TCP/IP forwarding channel.
+int 	ssh_channel_open_reverse_forward (ssh_channel channel, const char *remotehost, int remoteport, const char *sourcehost, int localport)	Open a TCP/IP reverse forwarding channel.
+int 	ssh_channel_open_session (ssh_channel channel)	Open a session channel (suited for a shell, not TCP forwarding).
+int 	ssh_channel_open_x11 (ssh_channel channel, const char *orig_addr, int orig_port)	Open a X11 channel.
+int 	ssh_channel_poll (ssh_channel channel, int is_stderr)	Polls a channel for data to read.
+int 	ssh_channel_poll_timeout (ssh_channel channel, int timeout, int is_stderr)	Polls a channel for data to read, waiting for a certain timeout.
+int 	ssh_channel_read (ssh_channel channel, void *dest, uint32_t count, int is_stderr)	Reads data from a channel.
+int 	ssh_channel_read_nonblocking (ssh_channel channel, void *dest, uint32_t count, int is_stderr)	Do a nonblocking read on the channel.
+int 	ssh_channel_read_timeout (ssh_channel channel, void *dest, uint32_t count, int is_stderr, int timeout)	Reads data from a channel.
+int 	ssh_channel_request_auth_agent (ssh_channel channel)	Send an "auth-agent-req" channel request over an existing session channel.
+int 	ssh_channel_request_env (ssh_channel channel, const char *name, const char *value)	Set environment variables.
+int 	ssh_channel_request_exec (ssh_channel channel, const char *cmd)	Run a shell command without an interactive shell.
+int 	ssh_channel_request_pty (ssh_channel channel)	Request a PTY.
+int 	ssh_channel_request_pty_size (ssh_channel channel, const char *terminal, int col, int row)	Request a pty with a specific type and size.
+int 	ssh_channel_request_send_exit_signal (ssh_channel channel, const char *sig, int core, const char *errmsg, const char *lang)	Send an exit signal to remote process (RFC 4254, section 6.10).
+int 	ssh_channel_request_send_exit_status (ssh_channel channel, int exit_status)	Send the exit status to the remote process.
+int 	ssh_channel_request_send_signal (ssh_channel channel, const char *sig)	Send a signal to remote process (as described in RFC 4254, section 6.9).
+int 	ssh_channel_request_shell (ssh_channel channel)	Request a shell.
+int 	ssh_channel_request_subsystem (ssh_channel channel, const char *subsys)	Request a subsystem (for example "sftp").
+int 	ssh_channel_request_x11 (ssh_channel channel, int single_connection, const char *protocol, const char *cookie, int screen_number)	Sends the "x11-req" channel request over an existing session channel.
+int 	ssh_channel_select (ssh_channel *readchans, ssh_channel *writechans, ssh_channel *exceptchans, struct timeval *timeout)	Act like the standard select(2) on channels.
+int 	ssh_channel_send_eof (ssh_channel channel)	Send an end of file on the channel.
+void 	ssh_channel_set_blocking (ssh_channel channel, int blocking)	Put the channel into blocking or nonblocking mode.
+void 	ssh_channel_set_counter (ssh_channel channel, ssh_counter counter)	Set the channel data counter.
+uint32_t 	ssh_channel_window_size (ssh_channel channel)	Get the remote window size.
+int 	ssh_channel_write (ssh_channel channel, const void *data, uint32_t len)	Blocking write on a channel.
+int 	ssh_channel_write_stderr (ssh_channel channel, const void *data, uint32_t len)	Blocking write on a channel stderr.
+const char * 	ssh_get_error (void *error)	Retrieve the error text message from the last error.
+int 	ssh_get_error_code (void *error)	Retrieve the error code from the last error.
+ssh_logging_callback 	ssh_get_log_callback (void)	Get the pointer to the logging callback function.
+int 	ssh_get_log_level (void)	Get the log level of the library.
+void * 	ssh_get_log_userdata (void)	Get the userdata of the logging function.
+int 	ssh_set_log_callback (ssh_logging_callback cb)	Set the logging callback function.
+int 	ssh_set_log_level (int level)	Set the log level of the library.
+int 	ssh_set_log_userdata (void *data)	Set the userdata for the logging function.
+void 	ssh_message_free (ssh_message msg)	Free a SSH message.
+ssh_message 	ssh_message_get (ssh_session session)	Retrieve a SSH message from a SSH session.
+int 	ssh_message_subtype (ssh_message msg)	Get the subtype of the message.
+int 	ssh_message_type (ssh_message msg)	Get the type of the message.
+char * 	ssh_basename (const char *path)	basename - parse filename component.
+char * 	ssh_dirname (const char *path)	Parse directory component.
+int 	ssh_getpass (const char *prompt, char *buf, size_t len, int echo, int verify)	Get a password from the console.
+int 	ssh_mkdir (const char *pathname, mode_t mode)	Attempts to create a directory with the given pathname.
+char * 	ssh_path_expand_tilde (const char *d)	Expand a directory starting with a tilde '~'.
+int 	ssh_timeout_update (struct ssh_timestamp *ts, int timeout)	updates a timeout value so it reflects the remaining time
+const char * 	ssh_version (int req_version)	Check if libssh is the required version or get the version string.
+void 	ssh_key_clean (ssh_key key)	clean up the key and deallocate all existing keys
+int 	ssh_key_cmp (const ssh_key k1, const ssh_key k2, enum ssh_keycmp_e what)	Compare keys if they are equal.
+void 	ssh_key_free (ssh_key key)	deallocate a SSH key
+int 	ssh_key_is_private (const ssh_key k)	Check if the key is a private key.
+int 	ssh_key_is_public (const ssh_key k)	Check if the key has/is a public key.
+ssh_key 	ssh_key_new (void)	creates a new empty SSH key
+enum ssh_keytypes_e 	ssh_key_type (const ssh_key key)	returns the type of a ssh key
+enum ssh_keytypes_e 	ssh_key_type_from_name (const char *name)	Convert a ssh key name to a ssh key type.
+const char * 	ssh_key_type_to_char (enum ssh_keytypes_e type)	Convert a key type to a string.
+int 	ssh_pki_copy_cert_to_privkey (const ssh_key certkey, ssh_key privkey)	Copy the certificate part of a public key into a private key.
+int 	ssh_pki_export_privkey_file (const ssh_key privkey, const char *passphrase, ssh_auth_callback auth_fn, void *auth_data, const char *filename)	Export a private key to a pem file on disk, or OpenSSH format for keytype ssh-ed25519.
+int 	ssh_pki_export_privkey_to_pubkey (const ssh_key privkey, ssh_key *pkey)	Create a public key from a private key.
+int 	ssh_pki_export_pubkey_base64 (const ssh_key key, char **b64_key)	Convert a public key to a base64 encoded key.
+int 	ssh_pki_generate (enum ssh_keytypes_e type, int parameter, ssh_key *pkey)	Generates a keypair.
+int 	ssh_pki_import_cert_base64 (const char *b64_cert, enum ssh_keytypes_e type, ssh_key *pkey)	Import a base64 formated certificate from a memory c-string.
+int 	ssh_pki_import_cert_file (const char *filename, ssh_key *pkey)	Import a certificate from the given filename.
+int 	ssh_pki_import_privkey_base64 (const char *b64_key, const char *passphrase, ssh_auth_callback auth_fn, void *auth_data, ssh_key *pkey)	import a base64 formated key from a memory c-string
+int 	ssh_pki_import_privkey_file (const char *filename, const char *passphrase, ssh_auth_callback auth_fn, void *auth_data, ssh_key *pkey)	Import a key from a file.
+int 	ssh_pki_import_pubkey_base64 (const char *b64_key, enum ssh_keytypes_e type, ssh_key *pkey)	Import a base64 formated public key from a memory c-string.
+int 	ssh_pki_import_pubkey_file (const char *filename, ssh_key *pkey)	Import a public key from the given filename.
+const char * 	ssh_pki_key_ecdsa_name (const ssh_key key)	returns the ECDSA key name ("ecdsa-sha2-nistp256" for example)
+int 	ssh_event_add_connector (ssh_event event, ssh_connector connector)	Add a connector to the SSH event loop.
+int 	ssh_event_add_fd (ssh_event event, socket_t fd, short events, ssh_event_callback cb, void *userdata)	Add a fd to the event and assign it a callback, when used in blocking mode.
+int 	ssh_event_add_poll (ssh_event event, ssh_poll_handle p)	Add a poll handle to the event.
+int 	ssh_event_add_session (ssh_event event, ssh_session session)	remove the poll handle from session and assign them to a event, when used in blocking mode.
+int 	ssh_event_dopoll (ssh_event event, int timeout)	Poll all the sockets and sessions associated through an event object.i.
+void 	ssh_event_free (ssh_event event)	Free an event context.
+ssh_event 	ssh_event_new (void)	Create a new event context.
+int 	ssh_event_remove_connector (ssh_event event, ssh_connector connector)	Remove a connector from an event context.
+int 	ssh_event_remove_fd (ssh_event event, socket_t fd)	Remove a socket fd from an event context.
+void 	ssh_event_remove_poll (ssh_event event, ssh_poll_handle p)	remove a poll handle to the event.
+int 	ssh_event_remove_session (ssh_event event, ssh_session session)	Remove a session object from an event context.
+void 	ssh_poll_add_events (ssh_poll_handle p, short events)	Add extra events to a poll object.
+int 	ssh_poll_ctx_add (ssh_poll_ctx ctx, ssh_poll_handle p)	Add a poll object to a poll context.
+int 	ssh_poll_ctx_add_socket (ssh_poll_ctx ctx, ssh_socket s)	Add a socket object to a poll context.
+int 	ssh_poll_ctx_dopoll (ssh_poll_ctx ctx, int timeout)	Poll all the sockets associated through a poll object with a poll context.
+void 	ssh_poll_ctx_free (ssh_poll_ctx ctx)	Free a poll context.
+ssh_poll_ctx 	ssh_poll_ctx_new (size_t chunk_size)	Create a new poll context.
+void 	ssh_poll_ctx_remove (ssh_poll_ctx ctx, ssh_poll_handle p)	Remove a poll object from a poll context.
+void 	ssh_poll_free (ssh_poll_handle p)	Free a poll object.
+ssh_poll_ctx 	ssh_poll_get_ctx (ssh_poll_handle p)	Get the poll context of a poll object.
+short 	ssh_poll_get_events (ssh_poll_handle p)	Get the events of a poll object.
+socket_t 	ssh_poll_get_fd (ssh_poll_handle p)	Get the raw socket of a poll object.
+ssh_poll_handle 	ssh_poll_new (socket_t fd, short events, ssh_poll_callback cb, void *userdata)	Allocate a new poll object, which could be used within a poll context.
+void 	ssh_poll_remove_events (ssh_poll_handle p, short events)	Remove events from a poll object.
+void 	ssh_poll_set_callback (ssh_poll_handle p, ssh_poll_callback cb, void *userdata)	Set the callback of a poll object.
+void 	ssh_poll_set_events (ssh_poll_handle p, short events)	Set the events of a poll object.
+void 	ssh_poll_set_fd (ssh_poll_handle p, socket_t fd)	Set the file descriptor of a poll object.
+int 	ssh_scp_accept_request (ssh_scp scp)	Accepts transfer of a file or creation of a directory coming from the remote party.
+int 	ssh_scp_close (ssh_scp scp)	Close the scp channel.
+int 	ssh_scp_deny_request (ssh_scp scp, const char *reason)	Deny the transfer of a file or creation of a directory coming from the remote party.
+void 	ssh_scp_free (ssh_scp scp)	Free a scp context.
+int 	ssh_scp_init (ssh_scp scp)	Initialize the scp channel.
+int 	ssh_scp_integer_mode (const char *mode)	Convert a scp text mode to an integer.
+int 	ssh_scp_leave_directory (ssh_scp scp)	Leave a directory.
+ssh_scp 	ssh_scp_new (ssh_session session, int mode, const char *location)	Create a new scp session.
+int 	ssh_scp_pull_request (ssh_scp scp)	Wait for a scp request (file, directory).
+int 	ssh_scp_push_directory (ssh_scp scp, const char *dirname, int mode)	Create a directory in a scp in sink mode.
+int 	ssh_scp_push_file (ssh_scp scp, const char *filename, size_t size, int mode)	Initialize the sending of a file to a scp in sink mode.
+int 	ssh_scp_push_file64 (ssh_scp scp, const char *filename, uint64_t size, int mode)	Initialize the sending of a file to a scp in sink mode, using a 64-bit size.
+int 	ssh_scp_read (ssh_scp scp, void *buffer, size_t size)	Read from a remote scp file.
+int 	ssh_scp_read_string (ssh_scp scp, char *buffer, size_t len)	Read a string on a channel, terminated by ' '.
+const char * 	ssh_scp_request_get_filename (ssh_scp scp)	Get the name of the directory or file being pushed from the other party.
+int 	ssh_scp_request_get_permissions (ssh_scp scp)	Get the permissions of the directory or file being pushed from the other party.
+size_t 	ssh_scp_request_get_size (ssh_scp scp)	Get the size of the file being pushed from the other party.
+uint64_t 	ssh_scp_request_get_size64 (ssh_scp scp)	Get the size of the file being pushed from the other party.
+const char * 	ssh_scp_request_get_warning (ssh_scp scp)	Get the warning string from a scp handle.
+char * 	ssh_scp_string_mode (int mode)	Convert a unix mode into a scp string.
+int 	ssh_scp_write (ssh_scp scp, const void *buffer, size_t len)	Write into a remote scp file.
+int 	ssh_blocking_flush (ssh_session session, int timeout)	Blocking flush of the outgoing buffer.
+void 	ssh_clean_pubkey_hash (unsigned char **hash)	Deallocate the hash obtained by ssh_get_pubkey_hash.
+int 	ssh_connect (ssh_session session)	Connect to the ssh server.
+void 	ssh_disconnect (ssh_session session)	Disconnect from a session (client or server).
+void 	ssh_free (ssh_session session)	Deallocate a SSH session handle.
+const char * 	ssh_get_cipher_in (ssh_session session)	get the name of the input cipher for the given session.
+const char * 	ssh_get_cipher_out (ssh_session session)	get the name of the output cipher for the given session.
+const char * 	ssh_get_clientbanner (ssh_session session)	get the client banner
+const char * 	ssh_get_disconnect_message (ssh_session session)	Get the disconnect message from the server.
+socket_t 	ssh_get_fd (ssh_session session)	Get the fd of a connection.
+char * 	ssh_get_hexa (const unsigned char *what, size_t len)	Convert a buffer into a colon separated hex string.
+const char * 	ssh_get_hmac_in (ssh_session session)	get the name of the input HMAC algorithm for the given session.
+const char * 	ssh_get_hmac_out (ssh_session session)	get the name of the output HMAC algorithm for the given session.
+char * 	ssh_get_issue_banner (ssh_session session)	Get the issue banner from the server.
+const char * 	ssh_get_kex_algo (ssh_session session)	get the name of the current key exchange algorithm.
+int 	ssh_get_openssh_version (ssh_session session)	Get the version of the OpenSSH server, if it is not an OpenSSH server then 0 will be returned.
+int 	ssh_get_poll_flags (ssh_session session)	Get poll flags for an external mainloop.
+int 	ssh_get_pubkey_hash (ssh_session session, unsigned char **hash)	int 	ssh_get_publickey (ssh_session session, ssh_key *key)
+int 	ssh_get_publickey_hash (const ssh_key key, enum ssh_publickey_hash_type type, unsigned char **hash, size_t *hlen)	Allocates a buffer with the hash of the public key.
+int 	ssh_get_server_publickey (ssh_session session, ssh_key *key)	Get the server public key from a session.
+const char * 	ssh_get_serverbanner (ssh_session session)	get the server banner
+int 	ssh_get_status (ssh_session session)	Get session status.
+int 	ssh_get_version (ssh_session session)	Get the protocol version of the session.
+int 	ssh_is_blocking (ssh_session session)	Return the blocking mode of libssh.
+int 	ssh_is_connected (ssh_session session)	Check if we are connected.
+int 	ssh_is_server_known (ssh_session session)	Check if the server is known.
+ssh_session 	ssh_new (void)	Create a new ssh session.
+int 	ssh_options_copy (ssh_session src, ssh_session *dest)	Duplicate the options of a session structure.
+int 	ssh_options_get (ssh_session session, enum ssh_options_e type, char **value)	This function can get ssh options, it does not support all options provided for ssh options set, but mostly those which a user-space program may care about having trusted the ssh driver to infer these values from underlaying configuration files.
+int 	ssh_options_get_port (ssh_session session, unsigned int *port_target)	This function can get ssh the ssh port.
+int 	ssh_options_getopt (ssh_session session, int *argcptr, char **argv)	Parse command line arguments.
+int 	ssh_options_parse_config (ssh_session session, const char *filename)	Parse the ssh config file.
+int 	ssh_options_set (ssh_session session, enum ssh_options_e type, const void *value)	This function can set all possible ssh options.
+void 	ssh_print_hexa (const char *descr, const unsigned char *what, size_t len)	Print a buffer as colon separated hex string.
+int 	ssh_select (ssh_channel *channels, ssh_channel *outchannels, socket_t maxfd, fd_set *readfds, struct timeval *timeout)	A wrapper for the select syscall.
+int 	ssh_send_debug (ssh_session session, const char *message, int always_display)	Send a debug message.
+int 	ssh_send_ignore (ssh_session session, const char *data)	Send a message that should be ignored.
+void 	ssh_set_blocking (ssh_session session, int blocking)	Set the session in blocking/nonblocking mode.
+void 	ssh_set_counters (ssh_session session, ssh_counter scounter, ssh_counter rcounter)	Set the session data counters.
+void 	ssh_set_fd_except (ssh_session session)	Tell the session it has an exception to catch on the file descriptor.
+void 	ssh_set_fd_toread (ssh_session session)	Tell the session it has data to read on the file descriptor without blocking.
+void 	ssh_set_fd_towrite (ssh_session session)	Tell the session it may write to the file descriptor without blocking.
+void 	ssh_silent_disconnect (ssh_session session)	Disconnect impolitely from a remote host by closing the socket.
+int 	ssh_write_knownhost (ssh_session session)	Write the current server as known in the known hosts file.
+void 	ssh_string_burn (struct ssh_string_struct *s)	Destroy the data in a string so it couldn't appear in a core dump.
+struct ssh_string_struct * 	ssh_string_copy (struct ssh_string_struct *s)	Copy a string, return a newly allocated string.
+void * 	ssh_string_data (struct ssh_string_struct *s)	Get the payload of the string.
+int 	ssh_string_fill (struct ssh_string_struct *s, const void *data, size_t len)	Fill a string with given data.
+void 	ssh_string_free (struct ssh_string_struct *s)	Deallocate a SSH string object.
+void 	ssh_string_free_char (char *s)	Deallocate a char string object.
+struct ssh_string_struct * 	ssh_string_from_char (const char *what)	Create a ssh string using a C string.
+const char * 	ssh_string_get_char (struct ssh_string_struct *s)	Get the the string as a C nul-terminated string.
+size_t 	ssh_string_len (struct ssh_string_struct *s)	Return the size of a SSH string.
+struct ssh_string_struct * 	ssh_string_new (size_t size)	Create a new SSH String object.
+char * 	ssh_string_to_char (struct ssh_string_struct *s)	Convert a SSH string to a C nul-terminated string.
+struct ssh_threads_callbacks_struct * 	ssh_threads_get_noop (void)	Get the noop threads callbacks structure.
+int 	ssh_threads_set_callbacks (struct ssh_threads_callbacks_struct *cb)	Set the thread callbacks structure.
+int 	ssh_finalize (void)	Finalize and cleanup all libssh and cryptographic data structures.
+int 	ssh_init (void)	Initialize global cryptographic data structures.
